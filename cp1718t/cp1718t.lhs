@@ -1041,17 +1041,17 @@ ledger = cataBlockchain (either (aux1 . (p2 . p2)) (soma . remLedgers))
 
 sendback:: [(MagicNo,Int)] -> Bool
 
-sendback [] = true
-sendback (x:xs) | b > 1 = false
+sendback [] = True
+sendback (x:xs) | b > 1 = False
                 |otherwise = sendback xs
                 where (a,b) = x
 
 addNo:: (Block,[(MagicNo,Int)]) -> [(MagicNo,Int)]
 
-addNo ((a,_),[]) = [(a,1)]
-addNo ((a,_),x:xs) | a == b = (b,c + 1) : xs
-                   | otherwise = x : addNo ((a,_),xs)
-                    where (b,c) = x
+addNo ((a,(t,tr)),[]) = [(a,1)]
+addNo ((a,(t,tr)),x:xs) | a == b = (b,c + 1) : xs
+                        | otherwise = x : addNo ((a,(t,tr)),xs)
+                        where (b,c) = x
 
 frstBlock:: Block -> [(MagicNo,Int)]
 
