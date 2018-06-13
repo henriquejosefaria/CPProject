@@ -1,0 +1,17 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4491/transformers-compat-0.6.2'
+Configuring transformers-compat-0.6.2...
+Building transformers-compat-0.6.2...
+Preprocessing library transformers-compat-0.6.2...
+[1 of 6] Compiling Paths_transformers_compat ( dist/dist-sandbox-8bb31270/build/autogen/Paths_transformers_compat.hs, dist/dist-sandbox-8bb31270/build/Paths_transformers_compat.o )
+[2 of 6] Compiling Data.Functor.Classes.Generic.Internal ( generics/Data/Functor/Classes/Generic/Internal.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Classes/Generic/Internal.o )
+[3 of 6] Compiling Data.Functor.Classes.Generic ( generics/Data/Functor/Classes/Generic.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Classes/Generic.o )
+[4 of 6] Compiling Control.Monad.Trans.Select ( 0.5/Control/Monad/Trans/Select.hs, dist/dist-sandbox-8bb31270/build/Control/Monad/Trans/Select.o )
+[5 of 6] Compiling Control.Monad.Trans.Accum ( 0.5/Control/Monad/Trans/Accum.hs, dist/dist-sandbox-8bb31270/build/Control/Monad/Trans/Accum.o )
+[6 of 6] Compiling Control.Monad.Trans.Instances ( src/Control/Monad/Trans/Instances.hs, dist/dist-sandbox-8bb31270/build/Control/Monad/Trans/Instances.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-transformers-compat-0.621463194511908194298.2
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/transformers-compat-0.6.2-CEHixJXTCvEBS57XQcpR2f
+Registering transformers-compat-0.6.2...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4491/transformers-compat-0.6.2'

@@ -1,0 +1,15 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4488/integer-logarithms-1.0.2.1'
+Configuring integer-logarithms-1.0.2.1...
+Building integer-logarithms-1.0.2.1...
+Preprocessing library integer-logarithms-1.0.2.1...
+[1 of 4] Compiling Math.NumberTheory.Powers.Natural ( src/Math/NumberTheory/Powers/Natural.hs, dist/dist-sandbox-8bb31270/build/Math/NumberTheory/Powers/Natural.o )
+[2 of 4] Compiling Math.NumberTheory.Powers.Integer ( src/Math/NumberTheory/Powers/Integer.hs, dist/dist-sandbox-8bb31270/build/Math/NumberTheory/Powers/Integer.o )
+[3 of 4] Compiling GHC.Integer.Logarithms.Compat ( src/GHC/Integer/Logarithms/Compat.hs, dist/dist-sandbox-8bb31270/build/GHC/Integer/Logarithms/Compat.o )
+[4 of 4] Compiling Math.NumberTheory.Logarithms ( src/Math/NumberTheory/Logarithms.hs, dist/dist-sandbox-8bb31270/build/Math/NumberTheory/Logarithms.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-integer-logarithms-1.0.216353394251654001669.1
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/integer-logarithms-1.0.2.1-JgHVbSmdq3T6w3beQf6Hew
+Registering integer-logarithms-1.0.2.1...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4488/integer-logarithms-1.0.2.1'

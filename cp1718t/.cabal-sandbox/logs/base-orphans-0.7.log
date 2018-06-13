@@ -1,0 +1,24 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4483/base-orphans-0.7'
+Warning: base-orphans.cabal: Unknown fields: build-tool-depends (line 62)
+Fields allowed in this section:
+type, main-is, test-module, buildable, build-tools, build-depends,
+cpp-options, cc-options, ld-options, pkgconfig-depends, frameworks,
+extra-framework-dirs, c-sources, js-sources, default-language,
+other-languages, default-extensions, other-extensions, extensions,
+extra-libraries, extra-ghci-libraries, extra-lib-dirs, includes,
+install-includes, include-dirs, hs-source-dirs, other-modules,
+ghc-prof-options, ghcjs-prof-options, ghc-shared-options,
+ghcjs-shared-options, ghc-options, ghcjs-options, jhc-options,
+hugs-options, nhc98-options
+Configuring base-orphans-0.7...
+Building base-orphans-0.7...
+Preprocessing library base-orphans-0.7...
+[1 of 2] Compiling Data.Orphans.Prelude ( src/Data/Orphans/Prelude.hs, dist/dist-sandbox-8bb31270/build/Data/Orphans/Prelude.o )
+[2 of 2] Compiling Data.Orphans     ( src/Data/Orphans.hs, dist/dist-sandbox-8bb31270/build/Data/Orphans.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-base-orphans-0510616708590357944.7
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/base-orphans-0.7-7CyAXPGxYqA2bTEYbRfM6r
+Registering base-orphans-0.7...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4483/base-orphans-0.7'

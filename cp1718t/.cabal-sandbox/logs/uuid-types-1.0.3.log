@@ -1,0 +1,14 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4492/uuid-types-1.0.3'
+Configuring uuid-types-1.0.3...
+Building uuid-types-1.0.3...
+Preprocessing library uuid-types-1.0.3...
+[1 of 3] Compiling Data.UUID.Types.Internal.Builder ( Data/UUID/Types/Internal/Builder.hs, dist/dist-sandbox-8bb31270/build/Data/UUID/Types/Internal/Builder.o )
+[2 of 3] Compiling Data.UUID.Types.Internal ( Data/UUID/Types/Internal.hs, dist/dist-sandbox-8bb31270/build/Data/UUID/Types/Internal.o )
+[3 of 3] Compiling Data.UUID.Types  ( Data/UUID/Types.hs, dist/dist-sandbox-8bb31270/build/Data/UUID/Types.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-uuid-types-1.015810301051557810404.3
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/uuid-types-1.0.3-GqEQc4tvP0z5VPPkSZJlrZ
+Registering uuid-types-1.0.3...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4492/uuid-types-1.0.3'

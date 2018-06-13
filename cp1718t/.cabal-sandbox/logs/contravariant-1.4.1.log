@@ -1,0 +1,15 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4485/contravariant-1.4.1'
+Configuring contravariant-1.4.1...
+Building contravariant-1.4.1...
+Preprocessing library contravariant-1.4.1...
+[1 of 4] Compiling Data.Functor.Contravariant ( src/Data/Functor/Contravariant.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Contravariant.o )
+[2 of 4] Compiling Data.Functor.Contravariant.Divisible ( src/Data/Functor/Contravariant/Divisible.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Contravariant/Divisible.o )
+[3 of 4] Compiling Data.Functor.Contravariant.Compose ( src/Data/Functor/Contravariant/Compose.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Contravariant/Compose.o )
+[4 of 4] Compiling Data.Functor.Contravariant.Generic ( src/Data/Functor/Contravariant/Generic.hs, dist/dist-sandbox-8bb31270/build/Data/Functor/Contravariant/Generic.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-contravariant-1.413418536351808266298.1
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/contravariant-1.4.1-DHbBPx2SHpEFTcPdSCXeqT
+Registering contravariant-1.4.1...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4485/contravariant-1.4.1'

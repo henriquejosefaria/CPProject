@@ -1,0 +1,26 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-6605/QuickCheck-2.11.3'
+Configuring QuickCheck-2.11.3...
+Building QuickCheck-2.11.3...
+Preprocessing library QuickCheck-2.11.3...
+[ 1 of 15] Compiling Test.QuickCheck.Exception ( Test/QuickCheck/Exception.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Exception.o )
+[ 2 of 15] Compiling Test.QuickCheck.Random ( Test/QuickCheck/Random.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Random.o )
+[ 3 of 15] Compiling Test.QuickCheck.Text ( Test/QuickCheck/Text.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Text.o )
+[ 4 of 15] Compiling Test.QuickCheck.State ( Test/QuickCheck/State.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/State.o )
+[ 5 of 15] Compiling Test.QuickCheck.Gen ( Test/QuickCheck/Gen.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Gen.o )
+[ 6 of 15] Compiling Test.QuickCheck.Gen.Unsafe ( Test/QuickCheck/Gen/Unsafe.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Gen/Unsafe.o )
+[ 7 of 15] Compiling Test.QuickCheck.Arbitrary ( Test/QuickCheck/Arbitrary.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Arbitrary.o )
+[ 8 of 15] Compiling Test.QuickCheck.Modifiers ( Test/QuickCheck/Modifiers.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Modifiers.o )
+[ 9 of 15] Compiling Test.QuickCheck.Property ( Test/QuickCheck/Property.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Property.o )
+[10 of 15] Compiling Test.QuickCheck.Monadic ( Test/QuickCheck/Monadic.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Monadic.o )
+[11 of 15] Compiling Test.QuickCheck.Test ( Test/QuickCheck/Test.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Test.o )
+[12 of 15] Compiling Test.QuickCheck.All ( Test/QuickCheck/All.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/All.o )
+[13 of 15] Compiling Test.QuickCheck.Poly ( Test/QuickCheck/Poly.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Poly.o )
+[14 of 15] Compiling Test.QuickCheck.Function ( Test/QuickCheck/Function.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck/Function.o )
+[15 of 15] Compiling Test.QuickCheck  ( Test/QuickCheck.hs, dist/dist-sandbox-8bb31270/build/Test/QuickCheck.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-QuickCheck-2.1114587779232007237709.3
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/QuickCheck-2.11.3-DjQAfsmnhoS9uk1VleYvkA
+Registering QuickCheck-2.11.3...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-6605/QuickCheck-2.11.3'

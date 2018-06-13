@@ -1,0 +1,168 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4269/lhs2tex-1.20'
+[1 of 1] Compiling Main             ( /var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4269/lhs2tex-1.20/dist/dist-sandbox-8bb31270/setup/setup.hs, /var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4269/lhs2tex-1.20/dist/dist-sandbox-8bb31270/setup/Main.o )
+Linking /var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4269/lhs2tex-1.20/dist/dist-sandbox-8bb31270/setup/setup ...
+Configuring lhs2tex-1.20...
+Building lhs2tex-1.20...
+Preprocessing executable 'lhs2TeX' for lhs2tex-1.20...
+[ 1 of 21] Compiling Value            ( src/Value.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Value.o )
+[ 2 of 21] Compiling Auxiliaries      ( src/Auxiliaries.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Auxiliaries.o )
+
+src/Auxiliaries.lhs:16:3: warning: [-Wdeprecations]
+    Module ‘Control.Monad.Error’ is deprecated:
+      Use Control.Monad.Except instead
+
+src/Auxiliaries.lhs:110:12: warning: [-Wdeprecations]
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+src/Auxiliaries.lhs:110:12: warning: [-Wdeprecations]
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+[ 3 of 21] Compiling FileNameUtils    ( src/FileNameUtils.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/FileNameUtils.o )
+[ 4 of 21] Compiling StateT           ( src/StateT.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/StateT.o )
+
+src/StateT.lhs:12:3: warning: [-Wdeprecations]
+    Module ‘Control.Monad.Error’ is deprecated:
+      Use Control.Monad.Except instead
+
+src/StateT.lhs:26:43: warning: [-Wdeprecations]
+    In the use of type constructor or class ‘ErrorT’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+src/StateT.lhs:40:36: warning: [-Wdeprecations]
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+src/StateT.lhs:42:59: warning: [-Wdeprecations]
+    In the use of ‘runErrorT’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+
+src/StateT.lhs:47:36: warning: [-Wdeprecations]
+    In the use of type constructor or class ‘Error’
+    (imported from Control.Monad.Error, but defined in transformers-0.5.2.0:Control.Monad.Trans.Error):
+    Deprecated: "Use Control.Monad.Trans.Except instead"
+[ 5 of 21] Compiling Document         ( src/Document.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Document.o )
+[ 6 of 21] Compiling Verbatim         ( src/Verbatim.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Verbatim.o )
+[ 7 of 21] Compiling Version          ( src/Version.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Version.o )
+[ 8 of 21] Compiling License          ( src/License.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/License.o )
+[ 9 of 21] Compiling FiniteMap        ( src/FiniteMap.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/FiniteMap.o )
+[10 of 21] Compiling TeXCommands      ( src/TeXCommands.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/TeXCommands.o )
+[11 of 21] Compiling TeXParser        ( src/TeXParser.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/TeXParser.o )
+[12 of 21] Compiling HsLexer          ( src/HsLexer.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/HsLexer.o )
+
+src/HsLexer.lhs:13:3: warning: [-Wdeprecations]
+    Module ‘Control.Monad.Error’ is deprecated:
+      Use Control.Monad.Except instead
+[13 of 21] Compiling Parser           ( src/Parser.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Parser.o )
+[14 of 21] Compiling Directives       ( src/Directives.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Directives.o )
+[15 of 21] Compiling Typewriter       ( src/Typewriter.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Typewriter.o )
+[16 of 21] Compiling MathCommon       ( src/MathCommon.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/MathCommon.o )
+[17 of 21] Compiling Math             ( src/Math.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Math.o )
+[18 of 21] Compiling MathPoly         ( src/MathPoly.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/MathPoly.o )
+[19 of 21] Compiling State            ( src/State.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/State.o )
+[20 of 21] Compiling NewCode          ( src/NewCode.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/NewCode.o )
+[21 of 21] Compiling Main             ( src/Main.lhs, dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX-tmp/Main.o )
+
+src/Main.lhs:21:3: warning: [-Wdeprecations]
+    Module ‘Control.Monad.Error’ is deprecated:
+      Use Control.Monad.Except instead
+Linking dist/dist-sandbox-8bb31270/build/lhs2TeX/lhs2TeX ...
+
+In file included from /var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/ghc4415_0/ghc_22.c:1:0: error:
+    
+
+In file included from /Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/Rts.h:217:0: error:
+    
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF || ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:31: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF || ZERO_SLOP_FOR_SANITY_CHECK
+                              ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:31: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+                               ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+                               ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+9 warnings generated.
+Installing executable(s) in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho Pratico/cp1718t/.cabal-sandbox/bin
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4269/lhs2tex-1.20'

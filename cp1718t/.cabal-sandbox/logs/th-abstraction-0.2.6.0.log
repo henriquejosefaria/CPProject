@@ -1,0 +1,13 @@
+cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4490/th-abstraction-0.2.6.0'
+Configuring th-abstraction-0.2.6.0...
+Building th-abstraction-0.2.6.0...
+Preprocessing library th-abstraction-0.2.6.0...
+[1 of 2] Compiling Language.Haskell.TH.Datatype.Internal ( src/Language/Haskell/TH/Datatype/Internal.hs, dist/dist-sandbox-8bb31270/build/Language/Haskell/TH/Datatype/Internal.o )
+[2 of 2] Compiling Language.Haskell.TH.Datatype ( src/Language/Haskell/TH/Datatype.hs, dist/dist-sandbox-8bb31270/build/Language/Haskell/TH/Datatype.o )
+Creating package registration file:
+/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-th-abstraction-0.2.612694067521816731566.0
+Installing library in /Users/henriquefaria/Documents/2ºano/2º
+semestre/CP/Trabalho
+Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/th-abstraction-0.2.6.0-1vR9KhnOqIMCPpUw0HZZ5k
+Registering th-abstraction-0.2.6.0...
+cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-4490/th-abstraction-0.2.6.0'
