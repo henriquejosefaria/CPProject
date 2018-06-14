@@ -1038,71 +1038,31 @@ soma ((a,b):list) = (a,bs) : soma restantes
 ledger = cataBlockchain (either (aux1 . (p2 . p2)) (soma . remLedgers))
 
 
+uniq::(Eq d) => d -> [d] -> Bool
 
-sendback:: [(MagicNo,Int)] -> Bool
+uniq s [] = True
+uniq s (x:xs) | s == x = False
+              | otherwise = uniq s xs
+
+sendback:: [MagicNo] -> Bool
 
 sendback [] = True
-sendback (x:xs) | b > 1 = False
-                |otherwise = sendback xs
-                where (a,b) = x
+sendback (x:xs) | uniq x xs = sendback xs
+                | otherwise = False
+                      
+addNo:: (Block,[MagicNo]) -> [MagicNo]
 
-addNo:: (Block,[(MagicNo,Int)]) -> [(MagicNo,Int)]
+addNo ((a,_),xs) = a : xs
 
-addNo ((a,(t,tr)),[]) = [(a,1)]
-addNo ((a,(t,tr)),x:xs) | a == b = (b,c + 1) : xs
-                        | otherwise = x : addNo ((a,(t,tr)),xs)
-                        where (b,c) = x
 
-frstBlock:: Block -> [(MagicNo,Int)]
+frstBlock:: Block -> [MagicNo]
 
-frstBlock (a,(b,c)) = [(a,1)]
+frstBlock (a,(b,c)) = [a]
 
 isValidMagicNr :: Blockchain -> Bool
 
 isValidMagicNr = sendback . cataBlockchain (either frstBlock addNo)
 
-
-
-
---tolistString :: Blockchain -> [(MagicNo,Integer)]
-
---tolistString (Bc (a,b)) = [(a,1)]
---tolistString (Bcs((a,b),blocks)) = (a,1): tolistString blocks
-
-
---isafter :: [Char] -> [Char] -> Int
-
---isafter [][] = 0
---isafter [] (y:ys) = 1
---isafter (x:xs) [] = -1
---isafter (x:xs)(y:ys) | x > y = -1 
---                     | x < y = 1
---                     | otherwise = isafter xs ys
-
-
---stringSort :: [(String,Integer)] -> [(String,Integer)] 
-
---stringSort [] = []
---stringSort ((a,b):strings) = stringSort (esq) ++ [(a,b)] ++ stringSort(dir)
---                             where dir = [(c,d)| (c,d) <- strings, isafter a c == 1] 
---                                   esq = [(c,d)| (c,d) <- strings, isafter a c == -1]
-
---countfrst :: Blockchain -> Int 
-
---countfrst (Bc a) = 1
---countfrst (Bcs(a,b)) = 1 + countfrst b
-
---count :: [(MagicNo,Integer)] -> Int 
-
---count [] = 0
---count (x:xs) = 1 + count xs
-
-
---isValidMagicNr (Bc a) = 1 == 1
---isValidMagicNr blocks = (count( stringSort (tolistString blocks)) - countfrst(blocks)) == 0
-
-
---isValidMagicNr = undefined
 \end{code}
 
 
@@ -1155,7 +1115,7 @@ distribui:: (d -> d) -> (d,(d,(d,d))) -> (d,(d,(d,d)))
 distribui f (a,(b,(c,d))) = (f a,(f b,(f c,f d))) 
 
 
-scaleQTree x = cataQTree (inQTree . (id >< (multi x >< multi x) -|- distribui (scaleQTree x)))
+scaleQTree x = cataQTree (inQTree . (id >< (multi x >< multi x) -|- id))
 
 --invert:: IO (Matrix PixelRGBA8) -> Matrix PixelRGBA8
 
