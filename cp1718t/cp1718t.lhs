@@ -431,10 +431,10 @@ bm2qt = anaQTree f where
 \leftskip-2em
 \rightskip\leftskip
 \begin{code}
-qt2bm :: (Eq a) => QTree a -> Matrix a
-qt2bm = cataQTree (either f g) where
-    f (k,(i,j)) = matrix j i (const k)
-    g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
+--qt2bm :: (Eq a) => QTree a -> Matrix a
+-- qt2bm = cataQTree (either f g) where
+--    f (k,(i,j)) = matrix j i (const k)
+--   g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
 \end{code}
 \endgroup
 \end{minipage}}
@@ -1070,9 +1070,11 @@ isValidMagicNr = sendback . cataBlockchain (either frstBlock addNo)
 
 \begin{code}
 -- inQTree :: Either (a, (Int, Int)) (QTree a, (QTree a, (QTree a, QTree a))) -> QTree a
--- Block (QTree a) (QTree a) (QTree a) (QTree a)
-inQTree (Left(a,(b,c))) = Cell a b c
-inQTree (Right(a,(b,(c,d)))) = Block a b c d
+
+inQTree = either Cell Block
+
+--inQTree (Left(a,(b,c))) = Cell a b c
+--inQTree (Right(a,(b,(c,d)))) = Block a b c d
 
   
 --outQTree :: QTree a -> Either (a, (Int, Int)) (QTree a, (QTree a, (QTree a, QTree a)))
@@ -1117,18 +1119,93 @@ distribui f (a,(b,(c,d))) = (f a,(f b,(f c,f d)))
 
 scaleQTree x = cataQTree (inQTree . (id >< (multi x >< multi x) -|- id))
 
---invert:: IO (Matrix PixelRGBA8) -> Matrix PixelRGBA8
+invert:: PixelRGBA8 -> PixelRGBA8
 
---invert [] = []
---invert (x:xs) =  (255 - x) : invert xs
+invert (PixelRGBA8 a b c d) =  (PixelRGBA8 (255 - a) (255 - b) (255 - c) d) 
 
 --  Inverter as cores de uma quadtree preserva a sua estrutura:
 --invertQTree = cataQTree (inQTree . ( writeBMP Block invert . readBMP id  >< (id >< id)  -|- distribui(invertQTree)))
-invertQTree = undefined
 
 
-compressQTree = undefined
-outlineQTree = undefined
+invertQTree = cataQTree (inQTree . (invert >< id -|- id))
+
+
+-- utilizando catamorfismos e/ou anamorfismos, que comprime uma quadtree cortando folhas da árvore para reduzir a sua profundidade num dado número de níveis.
+
+-- Cell a Int Int |  Block (QTree a) (QTree a) (QTree a) (QTree a)
+
+toCell::(Eq d) => ((d,(Int,Int)), ((d,(Int,Int)), ((d,(Int,Int)), (d,(Int,Int))))) -> (d,(Int,Int))
+
+toCell (a@(b,(c,d)),(e@(f,_),(g@(h,_),i@(j,_)))) | m > 1 = (b,(c*2,d*2))
+                                                 | otherwise = (f,(c*2,d*2))
+                                                 where xs = [f,h,j]
+                                                       x = b
+                                                       m = sum[1 | s <- xs, s == x]
+
+
+--desfoca:: Either (z,(Int,Int)) (d,(d,(d,d))) -> (z,(Int,Int))
+
+--desfoca (Right(a,(b,(c,d)))) = toCell((desfoca (outQTree a)),((desfoca (outQTree b)),((desfoca (outQTree c)),(desfoca (outQTree d) ))))
+--desfoca (Left(a,(b,c))) = (a,(b,c)) -- devolve celula recebida
+
+desfoca :: (QTree a,Int) -> QTree a
+desfoca = undefined
+
+
+maior:: (QTree a,Int) -> (QTree a,Int) -> (QTree a,Int) -> (QTree a,Int) -> Int
+
+maior (a,b) (c,d) (e,f) (g,h) = max (max b d) (max f h)
+
+
+
+decide:: Int -> (d -> d) -> ((QTree a,Int),((QTree a,Int),((QTree a,Int),(QTree a,Int)
+  ))) -> ((QTree a,(QTree a,(QTree a,QTree a))),Int)
+decide = undefined
+--decide x f (a,(b,(c,d))) | x > nivel = (((f a),((f b),((f c),(f d)))),nivel+1)
+--                         | otherwise = ((a,(b,(c,d))),nivel+1)
+--                         where nivel = maior a b c d
+
+--compressQTree :: Int -> QTree a -> QTree a
+
+formaPar:: (a,(Int,Int)) -> ((a,(Int,Int)),Int)
+
+formaPar a = (a,1)
+
+--- undistl -> usar
+
+-- 1º tamanho
+-- 2º forma celulas até chegar ao nivel a comprimir
+compressQTree x = p1 . cataQTree( (inQTree >< id) . (formaPar -|- (decide x desfoca)))
+
+
+--outlineQTree :: (a -> Bool) -> QTree a -> Matrix Bool
+
+--utilizando catamorfismos e/ou anamorfismos, que recebe uma função que determina quais os píxeis de fundo e converte uma quadtree numa matriz monocromática, de forma a desenhar o contorno de uma \href{https://en.wikipedia.org/wiki/Polygon_mesh}{malha poligonal} contida na imagem.
+
+--whitePx  = PixelRGBA8 255 255 255 255
+--blackPx  = PixelRGBA8 0 0 0 255
+
+
+--qt2bm :: (Eq a) => QTree a -> Matrix a
+
+
+contorna:: Int -> Int -> Int -> Int -> Matrix Bool -> Matrix Bool 
+
+contorna j i x y a | x < j && y < i = contorna j i (x + 1) y (setElem False (x,y) a)
+                   | x == j && y < i = contorna j i (1) (y + 1) a
+                   | otherwise = a
+
+
+qt2contorno :: (a -> Bool) -> QTree a -> Matrix Bool
+qt2contorno isBackground = cataQTree (either f g) where
+   f (k,(i,j)) | isBackground = contorna j i 1 1 (matrix j i (const True))
+               | otherwise = matrix j i (const True)
+   g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
+
+--outlineQTree :: (a -> Bool) -> QTree a -> Matrix Bool
+
+
+outlineQTree f = qt2contorno f
 
 
 
@@ -1165,7 +1242,7 @@ inFTree = undefined
 outFTree = undefined
 baseFTree = undefined
 recFTree = undefined
-cataFTree = undefined
+cataFTree g = g . recFTree (cataFTree g) . outFTree
 anaFTree = undefined
 hyloFTree = undefined
 
