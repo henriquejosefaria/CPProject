@@ -1,8 +1,8 @@
-cabal: Entering directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-3486/matrix-0.3.6.1'
+cabal: Entering directory '/var/folders/_n/xb0nmrd167vgc2dfr2164t9r0000gn/T/cabal-tmp-2041/matrix-0.3.6.1'
 Configuring matrix-0.3.6.1...
 Building matrix-0.3.6.1...
 Preprocessing library matrix-0.3.6.1...
-[1 of 1] Compiling Data.Matrix      ( Data/Matrix.hs, dist/dist-sandbox-8bb31270/build/Data/Matrix.o )
+[1 of 1] Compiling Data.Matrix      ( Data/Matrix.hs, dist/dist-sandbox-8b42a4cd/build/Data/Matrix.o )
 
 Data/Matrix.hs:81:1: warning: [-Wunused-imports]
     The import of ‘Data.Traversable’ is redundant
@@ -48,10 +48,156 @@ Data/Matrix.hs:1395:1: warning: [-Winline-rule-shadowing]
     Rule "matrix/detLUProduct" may never fire
       because rule "Class op *" for ‘*’ might fire first
     Probable fix: add phase [n] or [~n] to the competing rule
+[1 of 1] Compiling Data.Matrix      ( Data/Matrix.hs, dist/dist-sandbox-8b42a4cd/build/Data/Matrix.p_o )
+
+Data/Matrix.hs:81:1: warning: [-Wunused-imports]
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+
+Data/Matrix.hs:1364:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/traceOfSum" may never fire
+      because ‘trace’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘trace’
+
+Data/Matrix.hs:1364:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/traceOfSum" may never fire
+      because rule "Class op +" for ‘+’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+Data/Matrix.hs:1367:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/traceOfScale" may never fire
+      because ‘trace’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘trace’
+
+Data/Matrix.hs:1367:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/traceOfScale" may never fire
+      because ‘scaleMatrix’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘scaleMatrix’
+
+Data/Matrix.hs:1392:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/detLaplaceProduct" may never fire
+      because ‘detLaplace’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘detLaplace’
+
+Data/Matrix.hs:1392:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/detLaplaceProduct" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+Data/Matrix.hs:1395:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/detLUProduct" may never fire
+      because ‘detLU’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma for ‘detLU’
+
+Data/Matrix.hs:1395:1: warning: [-Winline-rule-shadowing]
+    Rule "matrix/detLUProduct" may never fire
+      because rule "Class op *" for ‘*’ might fire first
+    Probable fix: add phase [n] or [~n] to the competing rule
+
+In file included from /var/folders/_n/xb0nmrd167vgc2dfr2164t9r0000gn/T/ghc2945_0/ghc_3.c:2:0: error:
+    
+
+In file included from /Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/Rts.h:217:0: error:
+    
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF || ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:31: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF || ZERO_SLOP_FOR_SANITY_CHECK
+                              ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:505:31: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+                               ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:523:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:5: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:502:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_LDV_PROF'
+#define ZERO_SLOP_FOR_LDV_PROF     (defined(PROFILING))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+#if ZERO_SLOP_FOR_LDV_PROF && !ZERO_SLOP_FOR_SANITY_CHECK
+                               ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:37: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                    ^
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:552:32: error:
+     warning: macro expansion producing 'defined' has undefined behavior [-Wexpansion-to-defined]
+
+/Library/Frameworks/GHC.framework/Versions/8.0.1-x86_64/usr/lib/ghc-8.0.1/include/rts/storage/ClosureMacros.h:503:56: error:
+     note: expanded from macro 'ZERO_SLOP_FOR_SANITY_CHECK'
+#define ZERO_SLOP_FOR_SANITY_CHECK (defined(DEBUG) && !defined(THREADED_RTS))
+                                                       ^
+9 warnings generated.
+Running Haddock for matrix-0.3.6.1...
+Preprocessing library matrix-0.3.6.1...
+
+Data/Matrix.hs:81:1: warning: [-Wunused-imports]
+    The import of ‘Data.Traversable’ is redundant
+      except perhaps to import instances from ‘Data.Traversable’
+    To import instances alone, use: import Data.Traversable()
+Haddock coverage:
+ 100% ( 84 / 84) in 'Data.Matrix'
+Documentation created: dist/dist-sandbox-8b42a4cd/doc/html/matrix/index.html
 Creating package registration file:
-/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/pkgConf-matrix-0.3.614587779232007237709.1
-Installing library in /Users/henriquefaria/Documents/2ºano/2º
-semestre/CP/Trabalho
-Pratico/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/matrix-0.3.6.1-Dx0nPEisdQNArqh2QM5V03
+/var/folders/_n/xb0nmrd167vgc2dfr2164t9r0000gn/T/pkgConf-matrix-0.3.62128236579784558821.1
+Installing library in
+/Users/miriampinto/Desktop/CP/cp1718t/.cabal-sandbox/lib/x86_64-osx-ghc-8.0.1/matrix-0.3.6.1-Dx0nPEisdQNArqh2QM5V03
 Registering matrix-0.3.6.1...
-cabal: Leaving directory '/var/folders/1x/7614t3zs1lndnk3hzln_q8m00000gn/T/cabal-tmp-3486/matrix-0.3.6.1'
+cabal: Leaving directory '/var/folders/_n/xb0nmrd167vgc2dfr2164t9r0000gn/T/cabal-tmp-2041/matrix-0.3.6.1'

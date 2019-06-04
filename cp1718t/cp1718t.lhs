@@ -60,6 +60,12 @@
 %format LTree = "\mathsf{LTree}"
 %format inNat = "\mathsf{in}"
 %format (cataNat (g)) = "\cata{" g "}"
+%format (cataBlockchain (g)) = "\cata{" g "}"
+%format (cataQTree (g)) = "\cata{" g "}"
+%format (cataFTree (g)) = "\cata{" g "}"
+%format (anaBlockchain (g)) = "\ana{" g "}"
+%format (anaQTree (g)) = "\ana{" g "}"
+%format (anaFTree (g)) = "\ana{" g "}"
 %format Nat0 = "\N_0"
 %format muB = "\mu "
 %format (frac (n)(m)) = "\frac{" n "}{" m "}"
@@ -105,13 +111,14 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 99 (preencher)
+\textbf{Grupo} nr. & 31 
 \\\hline
-a11111 & Nome1 (preencher)	
+a82200 & Henrique José Carvalho Faria
 \\
-a22222 & Nome2 (preencher)	
+a82885 & José Augusto Ferreira Alves	
 \\
-a33333 & Nome3 (preencher)	
+a42040 & Miriam Miranda Pinto	
+\\
 \end{tabular}
 \end{center}
 
@@ -289,9 +296,7 @@ Neste contexto, implemente as seguintes funções:
 
 %if False
 \begin{code}
-
 allTransactions :: Blockchain -> Transactions
-
 prop1a :: Blockchain -> Bool
 \end{code}
 %endif
@@ -310,9 +315,7 @@ Note que a função |sort| é usada apenas para facilitar a comparação das lis
 
 %if False
 \begin{code}
-
 ledger :: Blockchain -> Ledger
-
 prop1b :: Blockchain -> Bool
 prop1c :: Blockchain -> Bool
 \end{code}
@@ -338,9 +341,7 @@ prop1c = sort . ledger .==. sort . ledger . reverseChain
 
 %if False
 \begin{code}
-
---isValidMagicNr :: Blockchain -> Bool
-
+isValidMagicNr :: Blockchain -> Bool
 prop1d :: Blockchain -> Bool
 prop1e :: Blockchain -> Property
 \end{code}
@@ -425,16 +426,16 @@ bm2qt = anaQTree f where
             (a,b,c,d) = splitBlocks (nrows m `div` 2) (ncols m `div` 2) m    
 \end{code}
 \endgroup
-\end{minipage}}%
+\end{minipage}} %
 \adjustbox{valign=t}{\begin{minipage}{.5\textwidth} %
 \begingroup
 \leftskip-2em
 \rightskip\leftskip
 \begin{code}
---qt2bm :: (Eq a) => QTree a -> Matrix a
--- qt2bm = cataQTree (either f g) where
---    f (k,(i,j)) = matrix j i (const k)
---   g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
+qt2bm :: (Eq a) => QTree a -> Matrix a
+qt2bm = cataQTree (either f g) where
+    f (k,(i,j)) = matrix j i (const k)
+    g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
 \end{code}
 \endgroup
 \end{minipage}}
@@ -666,7 +667,7 @@ g 0 = 1
 g (d+1) = underbrace ((d+1)) (s d) * g d
 
 s 0 = 1
-s (d+1) = s n + 1
+s (d+1) = s d + 1
 \end{spec}
 A partir daqui alguém derivou a seguinte implementação:
 \begin{code}
@@ -679,7 +680,7 @@ derive as funções |base k| e |loop| que são usadas como auxiliares acima.
 \begin{propriedade}
 Verificação que |bin n k| coincide com a sua especificação (\ref{eq:bin}):
 \begin{code}
-prop3 n k = (bin n k) == (fac n) % (fac k * (fac ((n-k))))
+prop3 (NonNegative n) (NonNegative k) = k<= n ==> (bin n k) == (fac n) % (fac k * (fac ((n-k))))
 \end{code}
 \end{propriedade}
 
@@ -977,290 +978,607 @@ propostos, de acordo com o ``layout'' que se fornece. Não podem ser
 alterados os nomes ou tipos das funções dadas, mas pode ser adicionado texto e / ou 
 outras funções auxiliares que sejam necessárias.
 
+%-------------------------------------------------------------------------------%
+\pagebreak
 \subsection*{Problema 1}
 
-\begin{code}
+Para a resolução deste problema, apercebemo-nos que estavamos a trabalhar com listas e para tal utilizamos o \emph{Functor}, \emph{Catamorfismol}, \emph{Anamorfismo} e \emph{Hylomorfismo} das listas, trabalhados nas aulas e disponíveis na página pública da disciplina.
 
---inBlockchain :: Either Block (Block, Blockchain) -> Blockchain
+\begin{code}
 
 inBlockchain = either Bc Bcs
 
---outBlockchain :: Blockchain -> Either Block (Block, Blockchain)
+outBlockchain (Bc a) = i1 a
 
-outBlockchain (Bc a) = i1 (a)
-outBlockchain (Bcs a) = i2 (a)
+outBlockchain (Bcs (a,b))= i2 (a,b)
 
---recBlockchain :: (c -> d) -> Either b1 (b2, c) -> Either b1 (b2, d)
-
-recBlockchain g = id -|- id >< g
-
-
---cataBlockchain :: (Either Block (Block, d) -> d) -> Blockchain -> d
+recBlockchain f = id -|- id >< f  
 
 cataBlockchain g = g . recBlockchain (cataBlockchain g) . outBlockchain 
 
+anaBlockchain g = inBlockchain . recBlockchain (anaBlockchain g) . g 
 
---anaBlockchain :: (c -> Either Block (Block, c)) -> c -> Blockchain
-
-anaBlockchain = undefined
-
-
-hyloBlockchain = undefined
-
-
---data Blockchain = Bc {bc :: Block}  |  Bcs {bcs :: (Block, Blockchain)}
-
-remTransactions:: (Block,Transactions) -> Transactions
-
-remTransactions ((_,(_,c)),b) = c ++ b
-
-allTransactions = cataBlockchain (either (p2 . p2) remTransactions)
-
---cataQTree (inQTree . (id >< swap -|- myswap))
-
-aux1:: Transactions -> Ledger 
-
-aux1 [] = []
-aux1 ((a,(b,c)):xs) = (a,-b) : (c,b) : aux1 xs
-
-remLedgers:: (Block,Ledger) -> Ledger
-
-remLedgers ((_,(_,c)),b) = (aux1 c) ++ b
-
-soma:: Ledger -> Ledger
-
-soma [] = []
-soma ((a,b):list) = (a,bs) : soma restantes
-                   where restantes = [(z,x) | (z,x) <- list, z /= a]
-                         bs = sum[ x | (z,x) <- list, z == a]
-
-
-ledger = cataBlockchain (either (aux1 . (p2 . p2)) (soma . remLedgers))
-
-
-uniq::(Eq d) => d -> [d] -> Bool
-
-uniq s [] = True
-uniq s (x:xs) | s == x = False
-              | otherwise = uniq s xs
-
-sendback:: [MagicNo] -> Bool
-
-sendback [] = True
-sendback (x:xs) | uniq x xs = sendback xs
-                | otherwise = False
-                      
-addNo:: (Block,[MagicNo]) -> [MagicNo]
-
-addNo ((a,_),xs) = a : xs
-
-
-frstBlock:: Block -> [MagicNo]
-
-frstBlock (a,(b,c)) = [a]
-
-isValidMagicNr :: Blockchain -> Bool
-
-isValidMagicNr = sendback . cataBlockchain (either frstBlock addNo)
+hyloBlockchain h g = cataBlockchain h . anaBlockchain g
 
 \end{code}
 
+A função \emph{allTransactions} cria uma lista com todas as transações que, no caso pretendido, estão contidas no segundo elemento do segundo par de cada \emph{Block}.
 
+\begin{code}
+
+allTransactions = cataBlockchain(either (p2 . p2) g2) where 
+  g2 (a,b) = ((p2 . p2) a) ++ b 
+
+\end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |Blockchain|
+           \ar[d]_-{|(cataBlockchain (f))|}
+           \ar[r]^-{|outBlockchain|}
+&
+      |Bc + (Bc |\times| Bcs)|
+           \ar[d]^{|id + id |\times| (cataBlockchain (f))|}
+\\
+      |[Transactions]|
+&
+      |Bc + Bc |\times| [Transactions]|
+           \ar[l]^-{|f = [p2.p2, g2]|}
+}
+\end{eqnarray*}
+
+A \emph{ledger} calcula o valor que cada entidade detem, podendo este ser negativo ou não negativo.
+Para tal criamos uma lista sem elementos repetidos onde cada par representa a entidade e o seu respectivo \emph{"value"}.
+
+\begin{code}
+
+ledger = cataList (either nil f) . allTransactions where f = nrep . sort . conc . (g >< id)
+
+\end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |Blockchain|
+           \ar[d]_-{|(cataBlockchain (h))|}
+           \ar[r]^-{|outBlockchain|}
+&
+      |Bc + (Bc |\times| Bcs)|
+           \ar[d]^{|id + id |\times| (cataBlockchain (h))|}
+\\
+      |Ledger|
+&
+      |Bc + Bc |\times| Ledger|
+           \ar[l]^-{|h = [nil, f]|}
+}
+\end{eqnarray*}
+
+Função auxiliar \emph{g} transforma uma Transaction em Ledger.
+
+\begin{code}
+
+g :: Transaction -> Ledger
+g (a,(b,c)) = [(a,-b),(c,b)]
+
+\end{code}
+
+Função auxiliar \emph{nrep} remove, da lista, as entidades repetidas.
+
+\begin{code}
+
+nrep :: Ledger -> Ledger
+nrep [] = []
+nrep [(a,b)] = [(a,b)]
+nrep ((a,b):((c,d):as)) = if a==c then nrep((a,b+d):as)
+                                  else ((a,b):(nrep((c,d):as)))
+\end{code}
+
+A função \emph{isValidMagicNr} verifica se existem elementos repetidos numa \emph{Blockchain}
+
+\begin{code}
+
+isValidMagicNr = m . (cataBlockchain(either (singl . p1) (cons . (p1 >< id))))
+                 
+\end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |Blockchain|
+           \ar[d]_-{|(cataBlockchain (h))|}
+           \ar[r]^-{|outBlockchain|}
+&
+      |Bc + (Bc |\times| Bcs)|
+           \ar[d]^{|id + id |\times| (cataBlockchain (h))|}
+\\
+      |Bool|
+&
+      |Bc + Bc |\times| Bool|
+           \ar[l]^-{|h = [singl.p1, p1|\times|id]|}
+}
+\end{eqnarray*}
+
+Função auxiliar que verifica se todos os \emph{MagicNo} de uma \emph{Blockchain} são válidos. 
+
+\begin{code}
+
+m :: [MagicNo] -> Bool
+m [] = True
+m (a:c) = if (elem a c) then False else m c
+
+\end{code}
+
+%------------------------------------------------------------------------------------%
+\pagebreak
 \subsection*{Problema 2}
 
 \begin{code}
--- inQTree :: Either (a, (Int, Int)) (QTree a, (QTree a, (QTree a, QTree a))) -> QTree a
 
-inQTree = either Cell Block
+myUncurry0 f (a,(b,(c,d))) = f a b c d
 
---inQTree (Left(a,(b,c))) = Cell a b c
---inQTree (Right(a,(b,(c,d)))) = Block a b c d
+myUncurry1 g (e,(r,s)) = g e r s 
 
-  
---outQTree :: QTree a -> Either (a, (Int, Int)) (QTree a, (QTree a, (QTree a, QTree a)))
-outQTree (Cell a b c) = i1(a,(b,c))
-outQTree (Block a b c d) = i2(a,(b,(c,d)))
+\end{code}
 
---baseQTree :: (a1 -> b) -> (a2 -> d1) -> Either (a1, d2) (a2, (a2, (a2, a2))) -> Either (b, d2) (d1, (d1, (d1, d1)))
-baseQTree g f = (g >< id) -|- f >< (f >< (f >< f))
+\begin{code}
 
---recQTree :: (a -> d1) -> Either (b, d2) (a, (a, (a, a))) -> Either (b, d2) (d1, (d1, (d1, d1)))
-recQTree g = baseQTree id g 
+inQTree = either (myUncurry1 Cell) (myUncurry0 Block) 
 
---cataQTree :: (Either (b, (Int, Int)) (d, (d, (d, d))) -> d) -> QTree b -> d
-cataQTree g = g . recQTree (cataQTree g) . outQTree
+outQTree (Cell a b c) = i1 (a,(b,c))
+outQTree (Block t1 t2 t3 t4) = i2 (t1,(t2,(t3,t4)))
 
---anaQTree :: (a1 -> Either (a2, (Int, Int)) (a1, (a1, (a1, a1)))) -> a1 -> QTree a2
+baseQTree f g = (f >< id) -|- (g >< (g >< (g >< g)))
 
-anaQTree g = inQTree . (recQTree (anaQTree g)) . g
+recQTree g = baseQTree id g
 
-hyloQTree = undefined
+cataQTree g = g . (recQTree (cataQTree g)) . outQTree 
+
+anaQTree g = inQTree . (recQTree (anaQTree g)) . g 
+
+hyloQTree h g = cataQTree h . anaQTree g 
+\end{code}
+
+\begin{code}
 
 instance Functor QTree where
-    fmap f = cataQTree ( inQTree . baseQTree f id )
+    fmap f = cataQTree(inQTree . (baseQTree f id))
+
+\end{code}
+
+A função \emph{myswap} serve para trocar a ordem dos ramos da QTree.
 
 
-myswap:: (d,(d,(d,d))) -> (d,(d,(d,d)))
+\begin{code}
+
 
 myswap (a,(b,(c,d))) = (c,(a,(d,b)))
 
-rotateQTree = cataQTree (inQTree . (id >< swap -|- myswap))
-
---  Redimensionar uma imagem altera o seu tamanho na mesma proporção:
-
-multi::(Num a) => a -> a -> a
-
-multi x a = a * x
-
-distribui:: (d -> d) -> (d,(d,(d,d))) -> (d,(d,(d,d)))
-
-distribui f (a,(b,(c,d))) = (f a,(f b,(f c,f d))) 
-
-
-scaleQTree x = cataQTree (inQTree . (id >< (multi x >< multi x) -|- id))
-
-invert:: PixelRGBA8 -> PixelRGBA8
-
-invert (PixelRGBA8 a b c d) =  (PixelRGBA8 (255 - a) (255 - b) (255 - c) d) 
-
---  Inverter as cores de uma quadtree preserva a sua estrutura:
---invertQTree = cataQTree (inQTree . ( writeBMP Block invert . readBMP id  >< (id >< id)  -|- distribui(invertQTree)))
-
-
-invertQTree = cataQTree (inQTree . (invert >< id -|- id))
-
-
--- utilizando catamorfismos e/ou anamorfismos, que comprime uma quadtree cortando folhas da árvore para reduzir a sua profundidade num dado número de níveis.
-
--- Cell a Int Int |  Block (QTree a) (QTree a) (QTree a) (QTree a)
-
-toCell::(Eq d) => ((d,(Int,Int)), ((d,(Int,Int)), ((d,(Int,Int)), (d,(Int,Int))))) -> (d,(Int,Int))
-
-toCell (a@(b,(c,d)),(e@(f,_),(g@(h,_),i@(j,_)))) | m > 1 = (b,(c*2,d*2))
-                                                 | otherwise = (f,(c*2,d*2))
-                                                 where xs = [f,h,j]
-                                                       x = b
-                                                       m = sum[1 | s <- xs, s == x]
-
-
---desfoca:: Either (z,(Int,Int)) (d,(d,(d,d))) -> (z,(Int,Int))
-
---desfoca (Right(a,(b,(c,d)))) = toCell((desfoca (outQTree a)),((desfoca (outQTree b)),((desfoca (outQTree c)),(desfoca (outQTree d) ))))
---desfoca (Left(a,(b,c))) = (a,(b,c)) -- devolve celula recebida
-
-desfoca :: (QTree a,Int) -> QTree a
-desfoca = undefined
-
-
-maior:: (QTree a,Int) -> (QTree a,Int) -> (QTree a,Int) -> (QTree a,Int) -> Int
-
-maior (a,b) (c,d) (e,f) (g,h) = max (max b d) (max f h)
-
-
-
-decide:: Int -> (d -> d) -> ((QTree a,Int),((QTree a,Int),((QTree a,Int),(QTree a,Int)
-  ))) -> ((QTree a,(QTree a,(QTree a,QTree a))),Int)
-decide = undefined
---decide x f (a,(b,(c,d))) | x > nivel = (((f a),((f b),((f c),(f d)))),nivel+1)
---                         | otherwise = ((a,(b,(c,d))),nivel+1)
---                         where nivel = maior a b c d
-
---compressQTree :: Int -> QTree a -> QTree a
-
-formaPar:: (a,(Int,Int)) -> ((a,(Int,Int)),Int)
-
-formaPar a = (a,1)
-
---- undistl -> usar
-
--- 1º tamanho
--- 2º forma celulas até chegar ao nivel a comprimir
-compressQTree x = p1 . cataQTree( (inQTree >< id) . (formaPar -|- (decide x desfoca)))
-
-
---outlineQTree :: (a -> Bool) -> QTree a -> Matrix Bool
-
---utilizando catamorfismos e/ou anamorfismos, que recebe uma função que determina quais os píxeis de fundo e converte uma quadtree numa matriz monocromática, de forma a desenhar o contorno de uma \href{https://en.wikipedia.org/wiki/Polygon_mesh}{malha poligonal} contida na imagem.
-
---whitePx  = PixelRGBA8 255 255 255 255
---blackPx  = PixelRGBA8 0 0 0 255
-
-
---qt2bm :: (Eq a) => QTree a -> Matrix a
-
-
-contorna:: Int -> Int -> Int -> Int -> Matrix Bool -> Matrix Bool 
-
-contorna j i x y a | x < j && y < i = contorna j i (x + 1) y (setElem False (x,y) a)
-                   | x == j && y < i = contorna j i (1) (y + 1) a
-                   | otherwise = a
-
-
-qt2contorno :: (a -> Bool) -> QTree a -> Matrix Bool
-qt2contorno isBackground = cataQTree (either f g) where
-   f (k,(i,j)) | isBackground = contorna j i 1 1 (matrix j i (const True))
-               | otherwise = matrix j i (const True)
-   g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
-
---outlineQTree :: (a -> Bool) -> QTree a -> Matrix Bool
-
-
-outlineQTree f = qt2contorno f
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \end{code}
 
-\subsection*{Problema 3}
+A função \emph{rotateQTree} roda a QTree recebida 90 graus para a direita.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |QTree a|
+           \ar[d]_-{|rotateQTree|}
+           \ar[r]^-{|outQTree|}
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[d]^{|id + (cataQTree g)|}
+\\
+      |QTree a|
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[l]^-{|[g,id]|}
+}
+\end{eqnarray*}
 
 \begin{code}
-base = undefined
-loop = undefined
+
+rotateQTree = cataQTree (inQTree . ((id >< swap) -|- myswap))
+
 \end{code}
 
+A função \emph{scaleQTree} aumenta ou diminui o tamanho da QTree recebida em função de um inteiro recebido alterando o tamanho definido pelas celulas.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |QTree a|
+           \ar[d]_-{|scaleQTree|}
+           \ar[r]^-{|outQTree|}
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[d]^{|id + (cataQTree g)|}
+\\
+      |QTree a|
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[l]^-{|[g,id]|}
+}
+\end{eqnarray*}
+
+\begin{code}
+
+scaleQTree s = cataQTree (inQTree . ((id >< ((s*) >< (s*))) -|- id))
+
+\end{code}
+
+A função \emph{invertQTree} inverte as cores da QTree subtraindo o valor das componentes da cor a 255.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |QTree a|
+           \ar[d]_-{|invertQTree|}
+           \ar[r]^-{|outQTree|}
+&
+      |PixelRGBA8 + (QTree a)|^|4|
+           \ar[d]^{|id + (fmap g)|}
+\\
+      |QTree a|
+&
+      |PixelRGBA8 + (QTree a)|^|4|
+           \ar[l]^-{|[g,id]|}
+}
+\end{eqnarray*}
+
+\begin{code}
+
+invert (PixelRGBA8 r g b a) = (PixelRGBA8 (255-r) (255-g) (255-b) a)
+invertQTree = fmap invert
+
+\end{code}
+
+
+A função \emph{toCellAux} foi criada apenas para comprimir as 4 celulas que lhe são passadas.
+
+\begin{code}
+
+toCellAux ((a,(b,c)),(d,(e,f)),(g,(h,i)),(j,(k,l))) = (a,(b+e,c+i))
+
+\end{code}
+
+A função \emph{compress} foi criada para recursivamente gerar compressões a partir das folhas até ao nivel da QTree em que está.
+
+\begin{code}
+
+compress (Left(a,(b,c))) = (a,(b,c))
+compress (Right(a,(b,(c,d)))) = 
+  toCellAux(
+  compress (outQTree a),
+  compress (outQTree b),
+  compress (outQTree c),
+  compress (outQTree d))
+
+\end{code}
+
+A função \emph{mimi} é necessária para decidir se estamos num nível baixo o suficiente para se efetuar uma compressão recursiva ou não.
+
+\begin{code}
+
+mimi x (a,b) | (b < x || b == x) = i1(compress (outQTree a))
+             | otherwise = outQTree a
+
+\end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |QTree a|
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[l]_-{|[g,id]|}
+\\
+      |QTree a|
+           \ar[u]^-{|compressQTree|}
+           \ar[r]_-{|outQTree|}
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[u]_-{|id + (anaQTree g)|}
+}
+\end{eqnarray*}
+
+A função \emph{compressQTree} comprime n niveis da àrvore recebida como argumento.
+Por motivos de validação no teste prop2f, as figuras obtidas por compressão têm um grau de compressão superior, de ordem 1, significando que às figuras obtidas foi aplicado mais um grau de compressão.
+
+\begin{code}
+
+compressQTree x = anaQTree(mimi x . split id depthQTree)
+
+\end{code}
+
+A função \emph{contorna} cria numa matriz um contorno de Trues e um interior de Falses.
+\begin{code}
+
+contorna:: Int -> Int -> Int -> Int -> Matrix Bool -> Matrix Bool 
+contorna j i x y a | x < j && y < i = contorna j i (x + 1) y (setElem False (x,y) a)
+                   | x == j && y < i = contorna j i (2) (y + 1) a
+                   | otherwise = a
+
+\end{code}
+
+A função \emph{outlineQTree} desenha o contorno de uma malha poligonal contida na imagem tirando partido de uma função que deteta o fundo da imagem.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |QTree a|
+           \ar[d]^-{|outlineQTree|}
+           \ar[r]^-{|outQTree|}
+&
+      |(a,Int|^|2) + (QTree a)|^|4|
+           \ar[d]^{|id + (cataQTree g)|}
+\\
+      |Matrix Bool|
+&
+      |(a,Int|^|2) + Matrix Bool|
+           \ar[l]_-{|[f,id]|}
+}
+\end{eqnarray*}
+
+\begin{code}
+
+outlineQTree isBackground = cataQTree (either f g) where
+   f (k,(i,j)) | isBackground k = contorna j i 2 2 (matrix j i (const True))
+               | otherwise = matrix j i (const False)
+   g (a,(b,(c,d))) = (a <|> b) <-> (c <|> d)
+
+\end{code}
+
+%------------------------------------------------------------------------------------%
+\pagebreak
+\subsection*{Problema 3}
+
+Para as funções |f k|, |l k|, |g| e |s| temos:
+
+\begin{eqnarray*}
+\start
+|lcbr(
+     lcbr(
+     (f k).(const 0) = (const 1)
+     )(
+     (f k).(succ) = mul . (split (f k) (l k)) 
+     ))(
+     lcbr(
+     (l k).(const 0) = (const (succ k))
+     )(
+     (l k).(succ) = succ . (l k)
+     ))| 
+|lcbr(
+     lcbr(
+     g.(const 0) = (const 1)
+     )(
+     g . (succ) = mul . (split s g)
+     ))(
+     lcbr(
+     s.(const 0) = (const 1)
+     )(
+     s . (succ) = succ . s
+     ))|
+\just\equiv{Eq-+, Fusão-+, Natural-id, Cancelamento-x, Absorção-+}
+%
+|lcbr(
+     lcbr(
+     (f k).inNat = (either (const 1) (mul)) . (id + (split (f k) (l k)))
+     )(
+     (l k).inNat = (either (const (succ k)) (succ . p2)) . (id + (split (f k) (l k))) 
+     ))(
+     lcbr(
+     g.inNat = (either (const 1) (mul)) . (id + (split s g))
+     )(
+     s.inNat = (either (const 1) (succ . p2)) . (id + (split s g))
+     ))| 
+%
+\just\equiv{Fokkinga}
+%
+|lcbr(
+     split (f k) (l k) = cataNat ( split (either (const 1) (mul)) (either (const (succ k)) (succ . p2)))
+     )(
+     split g s = cataNat ( split (either (const 1) (mul)) (either (const 1) (succ . p2)))
+     )|
+%
+\just\equiv{"Banana-split", Lei da troca}
+%
+|split (cataNat(either (split (const 1) (const (succ k))) (split (mul) (succ . p2)))) (cataNat(either (split (const 1) (const 1)) (split mul (succ . p2))) )|
+%
+\just\equiv{"Banana-split"}
+%
+|cataNat(((either (split (const 1) (const (succ k))) (split (mul) (succ . p2)))
+* (either (split (const 1) (const 1)) (split (mul) (succ . p2)))).(split (id +p1) (id + p2))|
+%
+\just\equiv{Absorção-x}
+%
+|cataNat(split ((either (split (const 1) (const (succ k))) (split (mul) (succ . p2) )). (id + p1)) (either (split (const 1) (const 1)) (split (mul) (succ . p2)) . (id + p2))|
+%
+\just\equiv{Absorção-+}
+%
+|cataNat( split (either (split (const 1) (const (succ k))) ((split (mul) (succ . p2)).p1) ) (either (split (const 1) (const 1)) ((split (mul) (succ . p2)).p2)) )|
+%
+\just\equiv{Def-x}
+%
+|cataNat ( split (either (split (const 1) (const (succ k))) (split ( mul . p1) (succ . p2 . p1 )) ) (either ( split (const 1) ( const 1)) ( split (mul . p2) ( succ .p2 .p2))  ) )|
+%
+\just\equiv{Lei da troca}
+%
+|cataNat ( either (split (split (const 1) (const (succ k))) ( split (const 1) (const 1) ))  (split (split (mul . p1) (succ . p2 .p1)) (split (mul . p2) (succ . p2 . p2)) ) )|
+\qed
+\end{eqnarray*}
+
+Quando chegamos a esta parte da nossa resolução da Pergunta 3 deparamo-nos com um 'problema'. Os parâmetros que estavamos a passar às funções |base k| e |loop| estavam a dar erros de tipo. As nossas funções recebem quadrúplos e nós estavamos a fornecer "pares de pares". Facilmente chegamos à conclusão que |base k = (1, k+1, 1, 1)|. Para obter a função |loop| fizemos o seguinte: 
+
+\begin{eqnarray*}
+\start
+|loop = split (split (mul . p1) (succ . p2 .p1)) (split (mul . p2) (succ . p2 .p2))|
+\just\equiv{Igualdade extensional}
+|loop ((a,b),(c,d)) = split (split (mul . p1) (succ . p2 . p1)) (split (mul . p2) (succ . p2 . p2)) ((a,b),(c,d))|
+\just\equiv{Def-split}
+|loop ((a,b),(c,d)) = ((split (mul . p1)(succ . p2 . p1)) ((a,b),(c,d)),(split (mul . p2)(succ.p2.p2)) ((a,b),(c,d)))|
+\just\equiv{Def-split , Def-comp, Def-proj}
+|loop ((a,b),(c,d)) = ((mul (a,b)),(succ b)),(mul(c,d),(succ d)))|
+\qed
+\end{eqnarray*}
+
+Após a aplicação das propriedades concluímos que |loop (a,b,c,d) = (a*b,b+1,c*d,d+1)|
+
+\begin{code}
+
+base k  = (1, k + 1, 1, 1)
+
+loop (a,b,c,d) = (a*b , b+1, c*d, d+1) 
+
+\end{code}
+
+%------------------------------------------------------------------------------------%
+\pagebreak
 \subsection*{Problema 4}
 
 \begin{code}
-inFTree = undefined
-outFTree = undefined
-baseFTree = undefined
-recFTree = undefined
-cataFTree g = g . recFTree (cataFTree g) . outFTree
-anaFTree = undefined
-hyloFTree = undefined
 
-instance Bifunctor FTree where
-    bimap = undefined
+myUncurry f (a,(b,c)) = f a b c
 
-generatePTree = undefined
-drawPTree = undefined
 \end{code}
-
-\subsection*{Problema 5}
 
 \begin{code}
-singletonbag = undefined
-muB = undefined
-dist = undefined
+
+inFTree = either (Unit) (myUncurry Comp)  
+
+outFTree (Unit b) = i1 b
+outFTree (Comp a t1 t2) = i2 (a,(t1,t2)) 
+
+baseFTree f g h = g -|- (f >< (h >< h))
+
+recFTree g = baseFTree id id g
+
+cataFTree g = g . (recFTree (cataFTree g)) . outFTree
+
+anaFTree g = inFTree . (recFTree (anaFTree g)) . g 
+
+hyloFTree h g = cataFTree h . anaFTree g 
+
 \end{code}
 
+\begin{code}
+
+instance Bifunctor FTree where
+    bimap f g = cataFTree(inFTree . (baseFTree f g id))
+
+\end{code}
+
+A função \emph{generatePTree} gera uma PTree com a profundidade passada como argumento, sendo o primeiro quadrado de lado \emph{100} e sendo cada quadrado seguinte redimensionado com a escala \emph{$\frac{\sqrt{2}}{2}$}.  
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+      |PTree a b|
+&
+      |((),b) + PTree a b|
+           \ar[l]_-{|[f,id]|}
+\\
+      |(Nat0,b)|
+           \ar[u]^-{|generatePTree|}
+           \ar[r]_-{|(outNat|\times|id).(split (id) (const 100))|}
+&
+      |(Nat0,b) + a|\times|(Nat0,b)|^|2|
+           \ar[u]_-{|id + id|\times|(anaQTree g)|}
+}
+\end{eqnarray*}
+
+\begin{code}
+
+generatePTree = anaFTree(f . (outNat >< id)) . (split id (const 100)) where
+  f((Left()), x) = Left (x)
+  f(Right c, x) = Right (x,((c,(sqrt(2)/2) * x),(c, (sqrt(2)/2) * x)))
+
+\end{code}
+
+A função \emph{addSquare} é responsavel por compor com translações e rotações cada \emph{Picture} das duas listas de \emph{Pictures} que recebe com a \emph{Picture} que as une.
+\begin{code}
+
+addSquare (a,([],[])) = []
+addSquare (a,((b:bs),(d:ds))) = (Pictures( (square a) 
+  : (translate (-a/2) a (rotate 315 b)) 
+  : (translate (a/2) a (rotate 45 d)) :[])) 
+  : addSquare (a,(bs,ds))
+
+\end{code}
+
+A função \emph{squares} serve exclusivamente para que não existam repetições do quadrado central entre cada \emph{Picture} que o utiliza.
+
+\begin{code}
+
+squares (a,(b,c)) = (square a) : addSquare (a,(b,c)) 
+
+\end{code}
+
+A função \emph{fstSquare} foi criada para devolver uma lista com uma \emph{Picture} para haver coerência entre tipos.
+
+\begin{code}
+
+fstSquare a = [square a]
+
+\end{code}
+
+A função \emph{drawPTree} desenha uma sequência de \emph{PTrees} começando nas folhas e efetuando as rotações e translações necesárias para desenhar a sequência de formação da àrvore.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+    |FTree a b|
+           \ar[d]_-{|outlineFTree|}
+           \ar[r]^-{|outQTree|}
+&
+    |b +  (a,(FTree a b)|^|2)|
+           \ar[d]^{|id + (cataFTree g)|}
+\\
+     |[Picture]|
+&
+     |b + [Picture]|
+           \ar[l]^-{|[g,id]|}
+}
+\end{eqnarray*}
+
+\begin{code}
+
+drawPTree = cataFTree(either fstSquare squares)
+
+\end{code}
+
+%------------------------------------------------------------------------------------%
+\pagebreak
+\subsection*{Problema 5}
+
+A função \emph{singletonbag} representa a lista elementar, isto é, a lista com apenas um elemento.
+
+\begin{code}
+
+singletonbag a = B [(a, 1)]
+
+\end{code}
+
+Na resolução do problema proposto começamos por aplicar a função já definida \emph{unB} para obtermos uma lista. Na mesma é aplicada uma função auxiliar \emph{g} onde utilizamos um \emph{map} e sucessivos \emph{unB}, criando listas de listas, que terão de ser concatenadas para criar uma lista final com todos os elementos de um \emph{Bag}.
+
+\begin{code}
+
+muB = B . concat . g . unB where 
+      g [] = []
+      g ((l,c):bags) = map (\(x,y) -> (x, y*c)) (unB l):(g bags)
+
+\end{code}
+
+Função que percorre a lista e soma os segundos elementos de cada par, pertencente a lista, com o intuito de saber o total de \emph{Marbles} pertencentes a um \emph{Bag}.
+
+\begin{code}
+
+somaTudo [] = 0
+somaTudo [(a,b)] = b
+somaTudo ((a,b):t) = b + (somaTudo t)
+
+\end{code}
+
+Função que calcula a probabilidade de cada cor, num dado \emph{Bag}. Para tal percorremos a lista utilizando um \emph{map} que pega no segundo elemento, de cada par, e divide-o pelo número total de elementos presentes no \emph{Bag}.
+
+\begin{code}
+
+dist (B a) = D (map (\(x,y) -> (x, (/) (toFloat y) (toFloat z))) a) where
+  z = somaTudo a
+
+\end{code}
+
+%------------------------------------------------------------------------------------%
+\pagebreak
 \section{Como exprimir cálculos e diagramas em LaTeX/lhs2tex}
 Estudar o texto fonte deste trabalho para obter o efeito:\footnote{Exemplos tirados de \cite{Ol18}.} 
 \begin{eqnarray*}
@@ -1284,7 +1602,6 @@ Estudar o texto fonte deste trabalho para obter o efeito:\footnote{Exemplos tira
 	)|
 \qed
 \end{eqnarray*}
-
 Os diagramas podem ser produzidos recorrendo à \emph{package} \LaTeX\ 
 \href{https://ctan.org/pkg/xymatrix}{xymatrix}, por exemplo: 
 \begin{eqnarray*}
@@ -1513,7 +1830,7 @@ invertBMP from to = withBMP from to invertbm
 
 depthQTree :: QTree a -> Int
 depthQTree = cataQTree (either (const 0) f)
-    where f (a,(b,(c,d))) = maximum [a,b,c,d]
+    where f (a,(b,(c,d))) = 1 + maximum [a,b,c,d]
 
 compressbm :: Eq a => Int -> Matrix a -> Matrix a
 compressbm n = qt2bm . compressQTree n . bm2qt

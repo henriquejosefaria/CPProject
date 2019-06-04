@@ -1,6 +1,6 @@
-Codec -any
-Matrix -any
+GLUT -any
 QuickCheck -any
 JuicyPixels -any
 gloss -any
+Matrix -any
 lhs2tex -any
